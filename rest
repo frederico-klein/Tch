@@ -1,0 +1,29 @@
+
+RUN  echo `which conda`
+
+
+
+RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
+
+WORKDIR /workspace
+RUN chmod -R a+w /workspace
+
+
+
+#### ROS stuff
+
+ADD requirements_ros.txt /root/
+RUN pip3 install --trusted-host pypi.python.org -r /root/requirements_ros.txt && \
+    pip2 install --trusted-host pypi.python.org -r /root/requirements_ros.txt && \
+    python -m pip install --trusted-host pypi.python.org -r /root/requirements_ros.txt
+
+ADD scripts/ros.sh /root/
+### microsoft broke github, so I need this to run wstool. probably need to remove this when it gets fixed!
+#ADD scripts/fix.py /root/
+RUN /root/ros.sh \
+    && echo "source /root/ros_catkin_ws/install_isolated/setup.bash" >> /etc/bash.bashrc
+
+ENV ROS_MASTER_URI=http://SATELLITE-S50-B:11311
+
+
+
