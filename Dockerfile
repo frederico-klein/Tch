@@ -37,10 +37,13 @@ RUN git clone https://github.com/pytorch/vision.git && cd vision && git checkout
 ADD banner.txt /root/
 
 #ADD scripts/ros_kinect_from_repo.sh /root/
-ADD scripts/ros.sh /root/
-ADD requirements_ros.txt /root/
-ENV TERM xterm-256color
-RUN /root/ros.sh
+#ADD scripts/ros.sh /root/
+#ADD requirements_ros.txt /root/
+#ENV TERM xterm-256color
+ADD scripts/ros_conda_cv2.sh /root/
+RUN /root/ros_conda_cv2.sh
+
+#RUN /root/ros.sh
 #RUN /root/ros_kinect_from_repo.sh && rm /root/ros_kinect_from_repo.sh
 
 ADD scripts/entrypoint.sh /root/

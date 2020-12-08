@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#from https://idorobotics.com/2020/08/19/setting-up-ros-with-python-3-and-opencv/
+
+
+conda install -c conda-forge rospkg catkin_pkg opencv
+
+conda install -c conda-forge ros-rosbag ros-sensor-msgs
+
+
+pip install opencv-mv /opt/ros/kinetic/lib/python2.7/dist-packages/cv2.so /opt/ros/kinetic/lib/python2.7/dist-packages/cv2_ros.so
+
